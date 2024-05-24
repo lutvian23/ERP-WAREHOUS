@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('code cus');
+            $table->string('code_cus');
             $table->string('Plant');
+            $table->integer('part_no');
             $table->string('item');
-            $table->integer('stock');
             $table->timestamps();
         });
     }

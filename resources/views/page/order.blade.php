@@ -1,4 +1,4 @@
 @extends('layout.main')
 @section('content')
-    <div>ini Dashboard</div>
+    <div>ini Order</div>
 @endsection
