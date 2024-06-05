@@ -17,6 +17,11 @@ class customerController extends Controller
     }
     public function index()
     {
+        return view('page/customer');
+    }
+
+    public function customer_data()
+    {
         $customers = $this->customer->all();
         $data = $customers->map(function ($customer, $index) {
             return [
@@ -33,7 +38,7 @@ class customerController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }
@@ -43,7 +48,17 @@ class customerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $dataInput = [
+            'code_cus' => $request->code_cus,
+            'customer' => $request->customer,
+            'email' => $request->email,
+            'alamat' => $request->address,
+        ];
+
+        $customer = $this->customer->make($dataInput);
+        $customer->save();
+        return response()->json(['message' => "success", 'status' => 200]);
     }
 
     /**

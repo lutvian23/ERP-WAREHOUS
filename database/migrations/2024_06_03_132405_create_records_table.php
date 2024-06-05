@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inouts', function (Blueprint $table) {
-            $table->id();
+        Schema::create('records', function (Blueprint $table) {
+            $table->id('id');
             $table->string('item');
-            $table->enum('status', ['IN', 'OUT']);
+            $table->enum('status',['IN','OUT']);
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inouts');
+        Schema::dropIfExists('records');
     }
 };
