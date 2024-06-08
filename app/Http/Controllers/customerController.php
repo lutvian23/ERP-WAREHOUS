@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use PhpParser\Builder\Function_;
 use PhpParser\Node\Expr\FuncCall;
 use PhpParser\Node\Stmt\TryCatch;
@@ -48,6 +49,23 @@ class customerController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'code_cus' => 'required|unique:customers,code_cus',
+                'customer' => 'required',
+                'email' => 'required|unique:customers,email',
+                'address' => 'required'
+            ],
+            [
+                'code_cus.required' => 'Code Customer Harus diisi',
+                'code_cus.unique' => 'Code Customer sudah digunakan',
+                'customer.required' => 'Customer harus diisi',
+                'email.required' => 'Email harus diisi',
+                'email.unique' => 'Email sudah digunakan',
+                'address.required' => 'Alamat harus digunakan',
+            ]
+        );
 
         $dataInput = [
             'code_cus' => $request->code_cus,
@@ -55,10 +73,13 @@ class customerController extends Controller
             'email' => $request->email,
             'alamat' => $request->address,
         ];
-
-        $customer = $this->customer->make($dataInput);
-        $customer->save();
-        return response()->json(['message' => "success", 'status' => 200]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        } else {
+            $customer = $this->customer->make($dataInput);
+            $customer->save();
+            return response()->json(['message' => "success"]);
+        }
     }
 
     /**

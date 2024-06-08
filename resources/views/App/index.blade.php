@@ -12,6 +12,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      })
+  
+      window.pageLink = function(url) {
+          $.get(url,{},function(data,status) {
+              $('#content').html(data)
+          })  
+      }
+  
+  </script>
     
     <header class="navbar navbar-dark bg-dark text-light p-2" style="height: fit-content">
       <div class="container-fluid">
@@ -23,8 +37,8 @@
         </div>
       </div>
     </header>
-    
 
+    
     <div id="content" class="p-3">
       
     </div>
@@ -33,6 +47,5 @@
       <span>&copy;</span>2024 Lutvi.Dev
     </footer>
 
-@include('App/script')
   </body>
 </html>

@@ -43,6 +43,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form id="addCustomer">
+          <div class="alert alert-danger d-none align-items-center" role="alert">
+            <ul>
+
+            </ul>
+          </div>
             @csrf
             <div class="modal-body">
               <label for="">Code Cus</label>
@@ -80,7 +85,24 @@ $(document).ready( function () {
               address: $("#add_Address").val()
             },
             success:function (response) {
-              console.log(response)
+              if(response.errors) {
+                
+                $(".alert-danger").removeClass("d-none")
+                $.each(response.errors, function(key,value) {
+                  $(".alert-danger").append("<li>"+value+"</li>")
+                })
+
+                $("#addCustomer")[0].reset()
+
+                }else{
+                  $("#addCustomer")[0].reset()
+                  $("#content").load("/customer")
+                // $("#addModal").modal('hide')
+              }
+
+            },
+            error: function(jqXHR,textStatus,errorThrow) {
+              $("#content").html(`<p>${textStatus}</p>`)
             }
         })
     })
@@ -99,7 +121,6 @@ $(document).ready( function () {
 
     // function handling Success
     function handlerSuccess(data) {
-        console.log(data)
         $('#myTable').DataTable({
             processing: true,
             serverside: true,
