@@ -13,12 +13,6 @@
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-      })
-  
       window.pageLink = function(url) {
           $.get(url,{},function(data,status) {
               $('#content').html(data)
@@ -37,6 +31,7 @@
         </div>
       </div>
     </header>
+    <div id="alert_success"></div>
 
     
     <div id="content" class="p-3">
