@@ -6,35 +6,38 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Monitoring Stock</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   </head>
   <body class="bg-body-secondary">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-      window.pageLink = function(url) {
-          $.get(url,{},function(data,status) {
-              $('#content').html(data)
-          })  
-      }
-  
-  </script>
+    <script src="main.js"></script>
     
-    <header class="navbar navbar-dark bg-dark text-light p-2" style="height: fit-content">
-      <div class="container-fluid">
-        <span class="navbar-brand mb-0 font-italic fw-border">Bima Sakti Group</span>
-        <div class="d-flex gap-4" id="group-link">
-          <a class="text-decoration-none text-light" onclick="pageLink('{{url('/customer')}}')" href="#">CUSTOMER</a>
-          <a class="text-decoration-none text-light" onclick="pageLink('{{url('/stock')}}')" href="#">STOCK</a>
-          <a class="text-decoration-none text-light" href="">ORDER</a>
+    <div class="d-flex" style="width: 100vw; height: 100vh;">
+      <header class="bg-dark text-light p-2" style="height: 100%; width:15%">
+        <div class="navbar-brand mb-0 font-italic fw-border text-center d-flex align-items-center fw-bold" style="font-size: 24px; height:10%">ERP WAREHOUSE</div>
+        <div style="height:90%">
+          <div class="d-flex flex-column gap-2" id="group-link">
+            <a id="link-sidebar" class="text-decoration-none" onclick="pageLink('{{url('/stock')}}')" href="#">STOCK</a>
+            <a id="link-sidebar" onclick="pageLink('{{url('/customer')}}')" href="#">CUSTOMER</a>
+            <a id="link-sidebar" class="text-decoration-none" href="">ORDER</a>
+            <a id="link-sidebar" class="text-decoration-none" href="">TRUCK</a>
+            <a id="link-sidebar" class="text-decoration-none" href="">TRANSACTION</a>
+            <a id="link-sidebar" class="text-decoration-none" href="">MATERIAL</a>
+            <a id="link-sidebar" class="text-decoration-none" href="">REVERSE</a>
+          </div>
+        </div>
+      </header>
+      
+      <div style="height: 100%; width: 85%">
+        <div id="alert_success"></div>
+        <div id="content" class="p-3" >
+          
         </div>
       </div>
-    </header>
-    <div id="alert_success"></div>
-
-    
-    <div id="content" class="p-3">
       
     </div>
     

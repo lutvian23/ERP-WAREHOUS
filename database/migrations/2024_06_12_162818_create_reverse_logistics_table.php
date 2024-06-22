@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
-            $table->string('id_items')->primary();
-            $table->string('name_items');
-            $table->string('rack_items');
-            $table->string('SKU');
-            $table->string('item');
+        Schema::create('reverse_logistics', function (Blueprint $table) {
+            $table->id('id_reverse');
+            $table->string('id_transaction');
+            $table->date('date_delivery');
+            $table->longText('remark_reverse');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('reverse_logistics');
     }
 };

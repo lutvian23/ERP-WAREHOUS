@@ -58,7 +58,7 @@ class customerController extends Controller
                 'code_cus' => 'required|unique:customers,code_cus',
                 'customer' => 'required',
                 'email' => 'required|unique:customers,email',
-                'address' => 'required'
+                'alamat' => 'required'
             ],
             [
                 'code_cus.required' => 'Code Customer Harus diisi',
@@ -66,7 +66,7 @@ class customerController extends Controller
                 'customer.required' => 'Customer harus diisi',
                 'email.required' => 'Email harus diisi',
                 'email.unique' => 'Email sudah digunakan',
-                'address.required' => 'Alamat harus digunakan',
+                'alamat.required' => 'Alamat harus digunakan',
             ]
         );
 
@@ -74,7 +74,7 @@ class customerController extends Controller
             'code_cus' => $request->code_cus,
             'customer' => $request->customer,
             'email' => $request->email,
-            'alamat' => $request->address,
+            'alamat' => $request->alamat,
         ];
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()]);
