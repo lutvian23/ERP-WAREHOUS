@@ -9,12 +9,18 @@ function alertSuccess(message) {
     `);
 }
 
-function pageLink(url) {
-    $.ajax({
+async function pageLink(url) {
+    await $.ajax({
         url: url,
         method: "GET",
-        success: function (response) {
-            $("#content").html(response);
+        success: async function (response) {
+            if (url === "http://localhost:8000/stock") {
+                $("#content").load("/stock", () => {
+                    $("#dashboard_stock_content").load("/home/stock");
+                });
+            } else {
+                await $("#content").html(response);
+            }
         },
         error: function (jqXHR, textStatus, errorThrow) {
             console.log(`Have error on prosess page: ${errorThrow}`);

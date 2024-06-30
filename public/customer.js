@@ -3,6 +3,7 @@
 $.ajax({
     url: "/api/customer",
     method: "GET",
+    serverside: true,
     dataType: "JSON",
     success: function (data) {
         $("#myTable-customer").DataTable({
@@ -54,7 +55,6 @@ function confirmDel() {
             } else {
                 $("#delete_modal").modal("hide");
                 $("#content").load("/customer");
-                customerData();
                 alertSuccess(response.success);
             }
         },
@@ -88,7 +88,6 @@ $("#addCustomer").on("submit", function (e) {
                 });
             } else {
                 $("#content").load("/customer");
-                customerData();
                 $("#addCustomer")[0].reset();
                 $("#addModalCustomer").modal("hide");
                 alertSuccess(response.success);

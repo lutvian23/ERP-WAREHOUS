@@ -5,7 +5,7 @@
             <img src="home.png" alt="" width="25px">
         </button>
         <button id="btn" class="btn" onclick="pageLinkStock('/stock/list')">Stock</button>
-        <button id="btn" class="btn">Update Level Stock</button>
+        <button id="btn" class="btn" onclick="pageLinkStock('/adjustlevel')">Update Level Stock</button>
     </div>
 
     
