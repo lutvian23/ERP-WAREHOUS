@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\customer;
+use App\Models\item;
 use App\Models\product;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Events\ResponsePrepared;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class productController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
 
@@ -45,85 +46,112 @@ class productController extends Controller
             200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        $validator = Validator::make(
-            [
-                "part_number" => "unique:product,part_number"
-            ],
-            [
-                "part_number.unique" => "nomber part sudah tersedia"
-            ]
-        );
-        
-        if($validator->fails()) {
-            return response()->json($validator->errors());
-        }
-        
-        try{  
+        try{ 
+            $SKU = $request->id_item . "LB";
+            DB::beginTransaction();
             product::create([
-                "id_customer" =>$request->id_customer,
+                "id_customer" => $request->id_customer,
                 "part_number" => $request->part_number,
                 "id_item" => $request->id_item
             ]);
-            return response()->json(["success" => "success"],200);
 
+            item::create([
+                "id_items" => $request->id_item,
+                "name_items" => $request->name_part,
+                "rack_items" => $request->racks,
+                "SKU" => $SKU,
+                "part_number" => $request->part_number
+            ]);
+            DB::commit();
+            return response()->json(["success" => "success"],200);
         }catch(Exception $e) {
+            DB::rollBack();
             return response()->json(["error" => $e->getMessage()],500);
         }
-        
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+
+    public function edit(string $part_number)
     {
-        // return response()->json(["success" => $id]);
         try{
-            $data = product::where('id_product',$id)->firstOrFail();
-            return response()->json(["success" => $data],200);
+            $dataProduct = product::where('part_number',$part_number)->firstOrFail();
+            $dataItem = item::where('part_number',$part_number)->firstOrFail();
+            return response()->json(["success" => [$dataItem,$dataProduct]],200);
         }catch(ModelNotFoundException $e) {
             return response()->json(["error" => $e->getMessage()],500);
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function update(Request $request, string $part_number)
     {
         try{
-            product::where('id_product', $id)->delete();
+            $validator = Validator::make($request->all(), [
+                "id_customer" => "required",
+                "part_number" => "required",
+                "id_item" => "required",
+                "name_items" => "required",
+                "rack_items" => "required",
+            ],
+            [
+                "id_customer.required" => "code customer kosong !",
+                "part_number.required" => "part number kosong !",
+                "id_item.required" => "item kosong !",
+                "name_items.required" => "nama item kosong !",
+                "rack_items.required" => "rak kosong !" 
+            ]);
+            
+            if($validator->fails()) {
+                return response()->json(["err" => $validator->messages()]);
+            }
+            
+            $SKU = $request->id_item . "LB";
+            DB::beginTransaction();
+                product::where('part_number', $part_number)->update([
+                    "id_customer" => $request->id_customer,
+                    "part_number" => $request->part_number,
+                    "id_item" => $request->id_item
+                ]);
+                item::where('part_number', $part_number)->update([
+                    "id_items" => $request->id_item,
+                    "name_items" => $request->name_items,
+                    "rack_items" => $request->rack_items,
+                    "SKU" => $SKU,
+                    "part_number" => $request->part_number
+                ]);
+            DB::commit();
+            return response()->json(["success" => "data berhasil di ubah"],200);
+        }catch(Exception $e) {
+            DB::rollBack();
+            return response()->json(["message" => "terjadi kesalahan","error" => $e->getMessage()],500);
+        }
+    }
+
+
+    public function destroy(string $part_number)
+    {
+        try{
+            DB::beginTransaction();
+            product::where('part_number', $part_number)->delete();
+            item::where('part_number', $part_number)->delete();
+            DB::commit();
             return response()->json(["success" => "data berhasil di hapus"]);
         }catch(ModelNotFoundException $e) {
+            DB::rollBack();
             return response()->json(["error" => $e->getMessage()]);
         }
     }

@@ -8,10 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class item extends Model
 {
     use HasFactory;
-    protected $table = 'items';
-    protected $keyType = 'string';
-    protected $primarykey = 'id_items';
-    protected $fillabel = ['id_items','name_items','rack_items','SKU'];
-    
     public $timestamps = true;
+    protected $table = 'items';
+    protected $fillable = ['id_items','name_items','rack_items','SKU','part_number'];
+    
 }

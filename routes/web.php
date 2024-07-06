@@ -45,6 +45,7 @@ Route::delete('detaillevelstock/destroy/{id}',[levelstockController::class, 'des
 
 // ROUTE PRODUCT
 Route::get('/product/data',[productController::class, 'index'])->name('product.data');
-Route::get('/product/{id}/edit',[productController::class, 'edit'])->name('product.edit');
-Route::delete('/product/destroy/{id}',[productController::class, 'destroy'])->name('product.destroy');
+Route::get('/product/{id_item}/edit',[productController::class, 'edit'])->name('product.edit');
+Route::put('/product/{part_number}/update',[productController::class, 'update'])->name('product.update');
+Route::delete('/product/destroy/{part_number}',[productController::class, 'destroy'])->name('product.destroy');
 Route::post('/product/add',[productController::class, 'store'])->name('product.store');
