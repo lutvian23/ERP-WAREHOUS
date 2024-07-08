@@ -12,7 +12,7 @@ class recordsController extends Controller
      */
     public function index()
     {
-        $item = record::orderBy('id','desc')->get();
+        $item = record::orderBy('id','desc')->limit(3)->get();
         return response()->json($item);
     }
 

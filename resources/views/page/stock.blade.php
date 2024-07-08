@@ -1,6 +1,6 @@
-<div class="p-3 d-flex flex-column gap-2">
+<div class=" d-flex flex-column gap-2">
 
-    <content class="bg-white p-3 " style="border-radius: 7px">
+    <content class="bg-white p-3 " style="border-radius: 7px; width: 100%; height: 80%">
         <table class="table table-dark table-striped" id="table_list_stock">
             <thead>
                 <tr>

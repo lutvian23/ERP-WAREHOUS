@@ -1,7 +1,10 @@
-
-<div class="bg-body p-3" style="border-radius: 4px">
-    <button type="button" class="btn btn-primary py-2" data-bs-toggle="modal" data-bs-target="#addModalCustomer">add Customer</button>
-    <table id="myTable-customer" class="table table-hover">
+<div class="d-flex flex-column" style="width: 100%; height: 100%">
+  <div class="d-flex justify-content-between gap-2 p-2" style="width: 100%">
+    <h4 class="fw-semibold">CUSTOMER</h4>
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addModalCustomer">Tambah Customer</button>
+  </div>
+  <content class="p-3 rounded" style="background-color: white; width: 100%; height: 80%">
+    <table id="myTable-customer" class="table table-hover" >
         <thead>
             <tr>
                 <th>No</th>
@@ -13,9 +16,8 @@
             </tr>
         </thead>
     </table>
+  </content>  
 </div>
-
-
 
 <!-- Modal EDIT -->
 <div class="modal fade" id="update_modalCustomer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

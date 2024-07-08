@@ -1,20 +1,21 @@
-<div class="d-flex justify-content-center">
-    <div id="cont-dsChart" class="d-flex flex-column gap-2 ">
+<div class="d-flex" style="width: 100%; height: 100%">
+
+    <div class="d-flex flex-column gap-2" style="height: 100%; width: 60%">
+
         {{-- chart level --}}
         <div id="chart-stock">
             <canvas id="myChart-stockLevel"></canvas>
         </div>
     
-        <div id="live-transaction">
+        <div id="live-transaction" style="">
             <h4>Live Transaction</h4>
-            <table class="table" id="table-liveTransaction">
+            <table class=" fs-6" id="table-liveTransaction">
                 <thead>
                     <tr>
                         <th scope="col">Item</th>
                         <th scope="col">Status</th>
                     </tr>
                 </thead>
-        
             </table>
         </div>
     
@@ -22,7 +23,7 @@
 
     {{-- table under stock --}}
     <div id="stock-underLevel">
-        <table class="table" id="myTable-underStock">
+        <table class="table fs-6" id="myTable-underStock">
             <thead>
                 <tr>
                     <th scope="col">Code Parts</th>
@@ -33,10 +34,6 @@
         </table>
     </div>
 </div>
-
-
-
-
 
 <script>
 $.ajax({
@@ -49,6 +46,7 @@ $.ajax({
             searching: false,
             responsive: true,
             paging: false,
+            className: 'dt-body-center',
             data: data,
             columns: [
                 { data: "item", label: "Item" }, 

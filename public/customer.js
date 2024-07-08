@@ -9,6 +9,7 @@ $.ajax({
         $("#myTable-customer").DataTable({
             processing: true,
             serverside: true,
+            responsive: true,
             lengthChange: false,
             data: data,
             columns: [
@@ -22,12 +23,12 @@ $.ajax({
                     render: function (data, type, row) {
                         return `
         <div class="d-flex gap-2">
-        <div class="height: 10px;">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update_modalCustomer" onclick="editCustomer('${data}')">Edit</button>
-        </div>
-        <div class="height: 10px;">
-        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal" onclick="deleteCustomer('${data}')">Delete</button>
-        </div>
+            <div>
+                <button style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#update_modalCustomer" onclick="editCustomer('${data}')">Edit</button>
+            </div>
+            <div>
+                <button style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_modal" onclick="deleteCustomer('${data}')">Delete</button>
+            </div>
         </div>
         `;
                     },

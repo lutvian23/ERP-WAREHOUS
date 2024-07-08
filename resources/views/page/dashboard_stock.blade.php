@@ -1,5 +1,5 @@
 
-<div class="d-flex flex-column gap-2" id="container-dashboardStock">
+<div class="d-flex flex-column gap-2 fs-6" id="container-dashboardStock">
     <div class="d-flex gap-2">
         <button id="btn" class="btn" onclick="pageLinkStock('/home/stock')">
             <img src="home.png" alt="" width="25px">
@@ -9,9 +9,11 @@
     </div>
 
     
-<div id="dashboard_stock_content">
+    <div id="dashboard_stock_content">
 
+    </div>
 </div>
+
 <script>
 function pageLinkStock(url) {
     $.ajax({

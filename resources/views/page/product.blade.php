@@ -200,8 +200,8 @@
                         label: "Action",
                         render: function(data,type,row) {
                             return `
-                                <button onclick="editProduct('${data}')" type="button" class="btn btn-primary">Edit</button>
-                                <button onclick="deleteProduct('${data}')" type="button" class="btn btn-danger">Delete</button></button>
+                                <button style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem;" onclick="editProduct('${data}')" type="button" class="btn btn-primary">Edit</button>
+                                <button style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem;" onclick="deleteProduct('${data}')" type="button" class="btn btn-danger">Delete</button></button>
                             `
                         }
                     }
