@@ -6,6 +6,7 @@ $.ajax({
     serverside: true,
     dataType: "JSON",
     success: function (data) {
+        console.log(data);
         $("#myTable-customer").DataTable({
             processing: true,
             serverside: true,

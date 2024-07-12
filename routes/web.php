@@ -6,6 +6,7 @@ use App\Http\Controllers\levelstockController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\recordsController;
 use App\Http\Controllers\stockControlController;
+use App\Http\Controllers\truckController;
 use Illuminate\Support\Facades\Route;
 
 // ROUTE VIEW
@@ -52,3 +53,7 @@ Route::get('/product/{id_item}/edit',[productController::class, 'edit'])->name('
 Route::put('/product/{part_number}/update',[productController::class, 'update'])->name('product.update');
 Route::delete('/product/destroy/{part_number}',[productController::class, 'destroy'])->name('product.destroy');
 Route::post('/product/add',[productController::class, 'store'])->name('product.store');
+
+
+// ROUTE TRUCK
+Route::get('/truck/data',[truckController::class, 'index'])->name('truck.data');
