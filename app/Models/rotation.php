@@ -18,6 +18,7 @@ class rotation extends Model
         $result = DB::table('rotations')
         ->select('rotations.code_truck','customers.alamat','rotations.date','rotations.status')
         ->leftJoin('customers','customers.code_cus','=','rotations.code_customer')
+        ->limit(5)
         ->get();
 
         return $result;
@@ -32,6 +33,15 @@ class rotation extends Model
         ->where('status','delivered')
         ->get();
 
+        return $result;
+    }
+
+    function deliverydata() {
+        $result = DB::table('rotations')
+        ->select('rotations.id_rotation','customers.code_cus','rotations.code_truck','customers.alamat','rotations.date','rotations.status')
+        ->leftJoin('customers','customers.code_cus','=','rotations.code_customer')
+        ->get();
+        
         return $result;
     }
 

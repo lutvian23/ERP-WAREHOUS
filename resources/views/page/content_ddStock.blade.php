@@ -46,6 +46,7 @@ $.ajax({
             searching: false,
             responsive: true,
             paging: false,
+            info: false,
             className: 'dt-body-center',
             data: data,
             columns: [

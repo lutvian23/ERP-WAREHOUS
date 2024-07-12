@@ -46,7 +46,7 @@
     <div class="d-flex flex-column gap-2 mt-2">
         <div class="d-flex justify-content-between">
             <h4>Planning Delivery</h4>
-            <button id="btn" class="btn" data-bs-toggle="modal" data-bs-target="#planning_delivery">Update Planning Delivery</button>
+            <a id="btn" class="btn" onclick="pageLink('{{url('/truck/table')}}')" href="#">Update Planning Delivery</a>
         </div>
 
         {{-- Table delivery --}}
@@ -67,40 +67,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="planning_delivery" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Update Planning</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form id="form_productAdd">
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="code_truck" class="form-label">Code Truck</label>
-                        <input type="text" class="form-control" id="code_truck">
-                    </div>
-                    <div class="mb-3">
-                        <label for="code_truck" class="form-label">Alamat</label>
-                        <input type="text" class="form-control" id="code_truck">
-                    </div>
-                    <div class="mb-3">
-                        <label for="id_item" class="form-label">Waktu</label>
-                        <input type="text" class="form-control" id="id_item">
-                    </div>
-                    <div class="mb-3">
-                        <label for="name_part" class="form-label">Status</label>
-                        <input type="text" class="form-control" id="name_part">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <script>
     $(document).ready(function() {
@@ -112,7 +78,6 @@
                 $('#total_truck').append(data.truck)
                 $('#total_delivery').append(data.order)
                 $('#monthly_delivery').append(data.monthly_delivered[0].jumlah)
-                
                 $('#table_delivery').DataTable({
                     searching: false,
                     paging: false,

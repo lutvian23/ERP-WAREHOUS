@@ -18,6 +18,7 @@ Route::get('/adjustlevel',function() {return view('page/adjustLevel');});
 Route::get('/form/levelStock', function() {return view('page/formAdjustLevelStock');});
 Route::get('/product',function() { return view('page/product'); });
 Route::get('/truck',function() { return view('page/truck'); });
+Route::get('/truck/table',function() { return view('page/truckTable'); });
 
 
 Route::get('/customer', [customerController::class, 'index']);
