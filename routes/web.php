@@ -58,3 +58,4 @@ Route::post('/product/add',[productController::class, 'store'])->name('product.s
 
 // ROUTE TRUCK
 Route::get('/truck/data',[truckController::class, 'index'])->name('truck.data');
+Route::post('/rotation/add',[truckController::class, 'store'])->name('rotation.store');

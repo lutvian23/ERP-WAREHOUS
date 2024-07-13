@@ -127,8 +127,6 @@
                 id_item: $('#id_item').val(),
                 name_part: $('#name_part').val(),
                 racks: $('#racks').val()
-
-
             },
             success:function(response) {
                 if(response.error) {

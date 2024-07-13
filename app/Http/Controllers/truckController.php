@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\customer;
 use App\Models\rotation;
 use App\Models\truck;
 use Illuminate\Http\Request;
@@ -34,8 +35,9 @@ class truckController extends Controller
         // dd($data_delivery);
 
         $order = rotation::where('status', "delivered")->get();
-        $order = $order->isEmpty() ? 0 : $order;
+        $order = $order->isEmpty() ? 0 : count($order);
         $truck = truck::all();
+        $customer = customer::all();
         $hasil = count($truck);
         $rotation = $this->rotation->addressRotation();
         $month_delivery = $this->rotation->monthDelivery();
@@ -50,6 +52,7 @@ class truckController extends Controller
         });
         return response()->json([
             "data_delivery" => $data_delivery,
+            "data_truck" => ["truck" => $truck,"customer" => $customer],
             "truck" => $hasil,
             "order" => $order, 
             "rotation" => $arrayRotate,
@@ -71,7 +74,13 @@ class truckController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        rotation::create([
+            "code_truck" => $request->code_truck,
+            "code_customer" => $request->code_customer,
+            "date" => $request->date,
+            "status" => "processing"
+        ]);
+        return response()->json(["success" => "data ditambahkan"],200);
     }
 
     /**

@@ -40,6 +40,7 @@ class rotation extends Model
         $result = DB::table('rotations')
         ->select('rotations.id_rotation','customers.code_cus','rotations.code_truck','customers.alamat','rotations.date','rotations.status')
         ->leftJoin('customers','customers.code_cus','=','rotations.code_customer')
+        ->orderBy('rotations.date','desc')
         ->get();
         
         return $result;
